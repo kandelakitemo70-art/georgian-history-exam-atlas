@@ -1,0 +1,35 @@
+// Shared palette and Georgian names for historical-basemaps polities.
+export const PALETTE = {
+  red: '#d9473f', ge: '#e0504a', pink: '#f0a39c', rose: '#e27aa6', salmon: '#f08a6c',
+  orange: '#ef9a3c', amber: '#e9b730', yellow: '#efd84a', lime: '#b5d35c', green: '#5fae62',
+  dkgreen: '#2f7d4a', teal: '#3fa59a', cyan: '#5bb8d8', blue: '#4a7fd0', navy: '#2d4b94',
+  purple: '#8d62c4', violet: '#b993dc', brown: '#9a6b45', tan: '#cfae7f', olive: '#9a9a45',
+  gray: '#9a9a9a', dkgray: '#5d5d5d', black: '#262626', maroon: '#8f3530', white: '#ffffff', gold: '#c9921a',
+};
+
+export const HB_KA = {
+  'Abbasid Caliphate': 'აბასიანთა სახალიფო', 'Achaemenid Empire': 'აქემენიანთა სახელმწიფო', 'Alans': 'ალანები',
+  'Albania': 'ალბანეთი', 'Armenia': 'სომხეთი', 'Assyria': 'ასურეთი', 'Austria': 'ავსტრია', 'Austria Hungary': 'ავსტრია-უნგრეთი',
+  'Austrian Empire': 'ავსტრიის იმპერია', 'Azerbaijan': 'აზერბაიჯანი', 'Babylonia': 'ბაბილონი', 'Bavaria': 'ბავარია',
+  'Bulgaria': 'ბულგარეთი', 'Bulgars': 'ბულგარელები', 'Burgundians': 'ბურგუნდები', 'Byzantine Empire': 'ბიზანტიის იმპერია',
+  'Caliphate of Córdoba': 'კორდობის სახალიფო', 'Carthage': 'კართაგენი', 'Carthaginian Empire': 'კართაგენი', 'Chagatai Khanate': 'ჩაღატაის ულუსი',
+  'Colchis': 'კოლხეთი', 'Crimean Khanate': 'ყირიმის სახანო', 'Croatia': 'ხორვატია', 'Egypt': 'ეგვიპტე', 'England': 'ინგლისი',
+  'England and Ireland': 'ინგლისი და ირლანდია', 'Fatimid Caliphate': 'ფატიმიანთა სახალიფო', 'France': 'საფრანგეთი',
+  'Frankish Kingdom': 'ფრანკთა სამეფო', 'Genoa': 'გენუა', 'Georgia': 'საქართველო', 'Georgian Kingdom': 'ქართული სამეფო',
+  'German Empire': 'გერმანიის იმპერია', 'Germany': 'გერმანია', 'Golden Horde': 'ოქროს ურდო', 'Hittites': 'ხეთები',
+  'Holy Roman Empire': 'საღვთო რომის იმპერია', 'Hungary': 'უნგრეთი', 'Huns': 'ჰუნები', 'Ilkhanate': 'ილხანთა სახელმწიფო',
+  'Iran': 'ირანი', 'Italy': 'იტალია', 'Khazars': 'ხაზარები', 'Kievan Rus': 'კიევის რუსეთი', 'Kingdom of France': 'საფრანგეთის სამეფო',
+  'Lithuania': 'ლიტვა', 'Mamluke Sultanate': 'მამლუქთა სასულთნო', 'Mongol Empire': 'მონღოლთა იმპერია', 'Mongolia': 'მონღოლეთი',
+  'Ostrogoths': 'ოსტგოთები', 'Ottoman Empire': 'ოსმალეთის იმპერია', 'Ottoman Sultanate': 'ოსმალეთი', 'Parthia': 'პართია',
+  'Parthian Empire': 'პართია', 'Persia': 'ირანი', 'Poland': 'პოლონეთი', 'Poland-Lithuania': 'რეჩ პოსპოლიტა', 'Portugal': 'პორტუგალია',
+  'Prussia': 'პრუსია', 'Ptolemaic Kingdom': 'პტოლემეოსთა ეგვიპტე', 'Roman Empire': 'რომის იმპერია', 'Roman Republic': 'რომის რესპუბლიკა',
+  'Romania': 'რუმინეთი', 'Russia': 'რუსეთი', 'Russian Empire': 'რუსეთის იმპერია', 'Safavid Empire': 'სეფიანთა ირანი',
+  'Sardinia': 'სარდინია', 'Sardinia-Piedmont': 'სარდინიის სამეფო', 'Sarmates': 'სარმატები', 'Sasanian Empire': 'სასანიანთა ირანი',
+  'Saxony': 'საქსონია', 'Scythians': 'სკვითები', 'Seleucid Kingdom': 'სელევკიდთა სახელმწიფო', 'Seljuk Empire': 'სელჩუკთა სასულთნო',
+  'Serbia': 'სერბეთი', 'Spain': 'ესპანეთი', 'Sweden': 'შვედეთი', 'Sweden–Norway': 'შვედეთი-ნორვეგია', 'Timurid Empire': 'თემურიანთა სახელმწიფო',
+  'Timurid Emirates': 'თემურიანები', 'Turkey': 'თურქეთი', 'USSR': 'სსრკ', 'Umayyad Caliphate': 'უმაიანთა სახალიფო', 'Urartu': 'ურარტუ',
+  'Vandals': 'ვანდალები', 'Venice': 'ვენეცია', 'Visigothic Kingdom': 'ვესტგოთთა სამეფო', 'Visigoths': 'ვესტგოთები',
+  'Nogai Horde': 'ნოღაელთა ურდო', 'Kazan Khanate': 'ყაზანის სახანო', 'Astrakhan Khanate': 'ასტრახანის სახანო',
+  'Lombard duchies': 'ლანგობარდები', 'Lombard principalities': 'ლანგობარდები', 'Seljuk Caliphate': 'სელჩუკები',
+  'Bulgar Khanate': 'ვოლგის ბულგარეთი', 'Sasanian dependencies': 'სასანიანთა ვასალები',
+};

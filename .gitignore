@@ -1,0 +1,15 @@
+# dependencies and generated build output
+node_modules/
+_build/dist/
+
+# tests pipeline: official PDFs (re-download with `node _build/tests/download.mjs`) and their extracted text
+_build/tests/pdf/
+_build/tests/ex/
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.vscode/
+.idea/
