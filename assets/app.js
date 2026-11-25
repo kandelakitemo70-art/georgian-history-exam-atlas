@@ -32,7 +32,7 @@
   const darkMQ = mq('(prefers-color-scheme: dark)');
   const themeNow = () => root.dataset.theme || (darkMQ.matches ? 'dark' : 'light');
   function applyTheme(t) {
-    if (t) root.dataset.theme = t; else delete root.dataset.theme;
+    if (t) root.dataset.theme = t;
     const meta = document.querySelector('meta[name="theme-color"]:not([media])');
     if (meta) meta.content = themeNow() === 'dark' ? '#17140f' : '#fffdf8';
     document.querySelectorAll('[data-theme-toggle]').forEach(b => { const d = themeNow() === 'dark'; b.setAttribute('aria-pressed', d); b.title = d ? 'ღია ფერები' : 'მუქი ფერები'; b.setAttribute('aria-label', b.title); });

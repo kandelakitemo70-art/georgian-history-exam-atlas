@@ -1,5 +1,5 @@
 /* საგამოცდო ისტორიული ატლასი — ეროვნული გამოცდების ტესტები (2020–2026)
-   Routes: #tests · #test/<id> (write) · #test/<id>/answers[/<task>] · #test/<id>/result
+   Routes: #tests · #test-<id> (write) · #test-<id>-answers[-<task>] · #test-<id>-result
    Data: window.TESTS (data/tests/index.js), window.TESTDATA[id] (data/tests/<id>.js, loaded on demand). */
 (function () {
   'use strict';
@@ -163,7 +163,7 @@
       <section class="choice">
         <button class="ch-row" data-act="answers"><span class="ch-ico">${ICON.eye}</span><span><b>პასუხების ნახვა</b><small>ყველა კითხვა სწორი პასუხებით და ოფიციალური შეფასების სქემით</small></span>${ICON.next}</button>
       </section>
-      ${hist.length ? `<p class="dlg-hist">ბოლო შედეგი: <b>${last.total} / ${last.max}</b> (${date(last.at)})${hist.length > 1 ? ` · საუკეთესო: <b>${best}</b>` : ''} · <a href="#test/${id}/result" data-act="result">ბოლო შედეგის ნახვა</a></p>` : ''}
+      ${hist.length ? `<p class="dlg-hist">ბოლო შედეგი: <b>${last.total} / ${last.max}</b> (${date(last.at)})${hist.length > 1 ? ` · საუკეთესო: <b>${best}</b>` : ''} · <a href="#test-${id}-result" data-act="result">ბოლო შედეგის ნახვა</a></p>` : ''}
       <p class="dlg-src">ოფიციალური წყარო: <a href="${esc(t.src ? t.src.test : '#')}" target="_blank" rel="noopener" data-src="test">ტესტი (PDF)</a> · <a href="#" target="_blank" rel="noopener" data-src="scheme">შეფასების სქემა</a> — <a href="https://naec.ge/" target="_blank" rel="noopener">naec.ge</a></p>`;
     const d = dialog(html, 'chooser');
     // official PDF links come with the test data; fill them in when it is loaded
@@ -186,10 +186,10 @@
         H.store.set('timepref', { mode, min });
         const limit = mode === 'official' ? t.time * 60 : mode === 'custom' ? min * 60 : null;
         setAtt(id, { mode, limit, started: Date.now(), elapsed: 0, ans: {}, flags: {}, cur: 0, done: false });
-        go('#test/' + id);
-      } else if (act === 'resume') go('#test/' + id);
-      else if (act === 'answers') go('#test/' + id + '/answers');
-      else if (act === 'result') { e.preventDefault(); go('#test/' + id + '/result'); }
+        go('#test-' + id);
+      } else if (act === 'resume') go('#test-' + id);
+      else if (act === 'answers') go('#test-' + id + '-answers');
+      else if (act === 'result') { e.preventDefault(); go('#test-' + id + '-result'); }
     }, { once: false });
   }
 
@@ -240,7 +240,7 @@
     return `<div class="wrap"><div class="tprogress">
       <span><b>${done.length}</b> / ${TESTS.length} ტესტი დაწერილი</span>
       ${best.length ? `<span>საუკეთესო შედეგების საშუალო: <b>${avg}%</b></span><span class="pbar" aria-hidden="true"><i style="width:${avg}%"></i></span>` : ''}
-      ${live.length ? `<a href="#test/${live[0].id}" class="btn">${live[0].year} · ${esc(vName(live[0]))} — გაგრძელება</a>` : ''}
+      ${live.length ? `<a href="#test-${live[0].id}" class="btn">${live[0].year} · ${esc(vName(live[0]))} — გაგრძელება</a>` : ''}
     </div></div>`;
   }
   function card(t) {
@@ -251,7 +251,7 @@
     if (live) status = `<span class="tst live">დაწყებულია · ${Object.keys(att.ans || {}).length}/${nUnits(t)}</span>`;
     else if (last) { const pc = last.total / last.max; status = `<span class="tst ${pc >= .75 ? 'good' : pc >= .5 ? 'mid' : 'low'}">ბოლო შედეგი: ${last.total}/${last.max}</span>`; }
     const kinds = [...new Set(t.kinds.map(k => KIND[k]))];
-    return `<a class="tcard" href="#test/${t.id}" data-test="${t.id}">
+    return `<a class="tcard" href="#test-${t.id}" data-test="${t.id}">
       <div class="tthumb">${t.thumb ? `<img src="img/tests/${t.thumb}" alt="" loading="lazy" decoding="async">` : ''}${t.session === 'extra' ? '<span class="tbadge extra">დამატებითი სესია</span>' : ''}</div>
       <div class="tbody">
         <span class="date">${t.year} · ${t.session === 'extra' ? 'დამატებითი სესია' : 'ძირითადი სესია'}</span>
@@ -526,7 +526,7 @@
       clearInterval(tick); tick = null;
       complete();
       const d = dialog(`<header class="dlg-h"><div><h2>დრო ამოიწურა</h2><p class="dlg-meta">ტესტი დასრულდა — როგორც ნამდვილ გამოცდაზე.</p></div></header><button class="btn primary big" data-ok data-focus>შედეგის ნახვა</button>`, 'small');
-      d.querySelector('[data-ok]').addEventListener('click', () => go('#test/' + id + '/result'));
+      d.querySelector('[data-ok]').addEventListener('click', () => go('#test-' + id + '-result'));
     }
     function complete() {
       step();
@@ -541,7 +541,7 @@
       const d = dialog(`<header class="dlg-h"><div><h2>დავასრულოთ ტესტი?</h2><p class="dlg-meta">${n} / ${M.units.length} კითხვაზე გაქვს პასუხი${left ? ` · <b>${left} უპასუხო</b>` : ''}${fl ? ` · ${fl} მონიშნული` : ''}</p></div><button class="iconbtn" data-close aria-label="დახურვა">${ICON.close}</button></header>
         <p class="dlg-note">დასრულების შემდეგ ნახავ შედეგს: ტესტური ნაწილი შეფასდება ავტომატურად, ღია კითხვებს კი შენ შეაფასებ ოფიციალური სქემით.</p>
         <div class="dlg-actions"><button class="btn" data-close>გაგრძელება</button><button class="btn primary" data-act="done" data-focus>დასრულება</button></div>`, 'small');
-      d.querySelector('[data-act="done"]').addEventListener('click', () => { clearInterval(tick); tick = null; complete(); go('#test/' + id + '/result'); });
+      d.querySelector('[data-act="done"]').addEventListener('click', () => { clearInterval(tick); tick = null; complete(); go('#test-' + id + '-result'); });
     }
     // keyboard: 1–4 / ა–დ choose, ←/→ move, F flag
     keyHandler = e => {
@@ -562,7 +562,7 @@
     });
     show(att.cur);
   }
-  // a link to #test/<id> without a running attempt: the start page (same choices as the dialog)
+  // a link to #test-<id> without a running attempt: the start page (same choices as the dialog)
   function renderStart(id) {
     renderCatalog();
     chooser(id);
@@ -580,7 +580,7 @@
         <div class="rtitle"><b>ისტორია ${t.year}</b><small>${esc(vName(t))} · პასუხები</small></div>
         <span class="spacer"></span>
         <label class="switch"><input type="checkbox" id="rv" ${reveal ? 'checked' : ''}><span>პასუხები ჩანს</span></label>
-        <button class="iconbtn hide-sm" id="tprint" aria-label="ბეჭდვა" title="ბეჭდვა">${ICON.print}</button>
+        ${window.self === window.top ? `<button class="iconbtn hide-sm" id="tprint" aria-label="ბეჭდვა" title="ბეჭდვა">${ICON.print}</button>` : ''}
         <button class="btn primary" id="twrite">${ICON.pen}<span class="hide-sm">დაწერა</span></button>
       </div></div>
       <div class="wrap review">
@@ -608,7 +608,7 @@
     }
     draw();
     H.app.querySelector('#rv').addEventListener('change', e => { reveal = e.target.checked; H.store.set('reveal', reveal); shown.clear(); draw(); });
-    H.app.querySelector('#tprint').addEventListener('click', () => window.print());
+    const pb = H.app.querySelector('#tprint'); if (pb) pb.addEventListener('click', () => window.print());   // printing is not available inside embedding frames
     H.app.querySelector('#twrite').addEventListener('click', () => chooser(id));
     list.addEventListener('click', e => {
       const r = e.target.closest('[data-reveal]'); if (r) { shown.add(r.dataset.reveal); revealOne(r.dataset.reveal); return; }
@@ -640,7 +640,7 @@
           <button class="chip on" data-f="all">ყველა</button><button class="chip" data-f="bad">შეცდომები</button><button class="chip" data-f="open">ღია კითხვები</button><button class="chip" data-f="empty">უპასუხო</button>
         </div>
         <div id="rlist"></div>
-        <div class="ractions"><button class="btn primary" id="tagain2">${ICON.pen}თავიდან დაწერა</button><a class="btn" href="#test/${id}/answers">${ICON.eye}პასუხების ნახვა</a><a class="btn" href="#tests">ყველა ტესტი</a></div>
+        <div class="ractions"><button class="btn primary" id="tagain2">${ICON.pen}თავიდან დაწერა</button><a class="btn" href="#test-${id}-answers">${ICON.eye}პასუხების ნახვა</a><a class="btn" href="#tests">ყველა ტესტი</a></div>
       </div>`;
     const sum = H.app.querySelector('#rsum'), list = H.app.querySelector('#rlist');
     function drawSum() {
@@ -707,14 +707,16 @@
   function examLinksHTML(mapId) {
     const ts = testsForMap(mapId);
     if (!ts.length) return '';
-    return `<section class="panel examtests"><h3>გამოცდაზე იყო</h3><p>ამ თემის რუკა იყო ეროვნული გამოცდის ტესტში:</p><ul>${ts.map(t => `<li><a href="#test/${t.id}/answers/${t.mapTask}">${t.year} · ${esc(vFull(t))}<small>დავალება ${t.mapTask} — რუკის ანალიზი</small></a></li>`).join('')}</ul></section>`;
+    return `<section class="panel examtests"><h3>გამოცდაზე იყო</h3><p>ამ თემის რუკა იყო ეროვნული გამოცდის ტესტში:</p><ul>${ts.map(t => `<li><a href="#test-${t.id}-answers-${t.mapTask}">${t.year} · ${esc(vFull(t))}<small>დავალება ${t.mapTask} — რუკის ანალიზი</small></a></li>`).join('')}</ul></section>`;
   }
 
   // ---------- routing
-  function match(h) { return h === 'tests' || /^test\//.test(h); }
+  // plain hash names (letters, digits, hyphens): #test-2024-1, #test-2024-1-answers, #test-2024-1-answers-36, #test-2024-1-result
+  const RX_ROUTE = /^test-(\d{4}-\d)(?:-(answers|result)(?:-(\d{1,2}))?)?$/;
+  function match(h) { return h === 'tests' || RX_ROUTE.test(h); }
   function render(h) {
     if (h === 'tests') { renderCatalog(); window.scrollTo(0, 0); return; }
-    const [, id, sub, target] = h.split('/');
+    const [, id, sub, target] = h.match(RX_ROUTE) || [];
     if (!byId[id]) { renderCatalog(); return; }
     H.app.innerHTML = `<div class="wrap"><p class="loadmsg">ტესტი იტვირთება…</p></div>`;
     loadTest(id).then(D => {

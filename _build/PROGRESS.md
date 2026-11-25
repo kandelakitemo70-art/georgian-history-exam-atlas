@@ -50,7 +50,7 @@ pretty.mjs <id> = proofreading dump. MAPLINKS in manifest.mjs = atlas map ids pe
 Gotchas: pdf.js word gaps can be ~0.2 em (space threshold 0.1 em); column gutters are narrower than 2.5 em, so columns are split on
 items with an empty band ≥8 pt and ≥3 aligned lines; 2016 options are "ა." not "ა)"; old covers are drawn (max from the scheme);
 2024-4 scheme has "28.7." for 38.7 (fixes.mjs); Git Bash heredocs strip backslashes from regexes — edit such code with the Edit tool.
-Front end: assets/tests.js (routes #tests, #test/<id>, #test/<id>/answers[/<task>], #test/<id>/result; chooser <dialog> = bottom sheet
+Front end: assets/tests.js (routes #tests, #test-<id>, #test-<id>-answers[-<task>], #test-<id>-result (plain hash names: claude.ai frames keep only #name); chooser <dialog> = bottom sheet
 on phones; attempts in localStorage `hatlas:att:<id>`, history `hatlas:hist:<id>`; official time counts while away from the tab,
 other modes only while visible). app.js: router hook, theme toggle (data-theme), phone tab bar (hides on scroll down), exam links on
 map pages, about page (offline download via sw.js message). PWA: manifest.webmanifest, sw.js, assets/icons/.
